@@ -1,2 +1,2 @@
 # Eventia - Plataforma de Eventos
-Repository reset por Angie - base limpia para migración desde dotnet/eShop
+Repositorio limpio listo para empezar desde cero
