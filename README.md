@@ -1,2 +1,2 @@
 # Eventia - Plataforma de Eventos
-Repositorio limpio listo para empezar desde cero
+Repositorio totalmente limpio listo para comenzar desde cero
