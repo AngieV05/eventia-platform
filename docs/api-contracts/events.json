@@ -1,0 +1,29 @@
+{
+  "service": "events",
+  "base_url": "http://localhost:8005",
+  "endpoints": [
+    {
+      "path": "/events",
+      "method": "GET",
+      "description": "Listar eventos con filtros",
+      "request": {
+        "query": {"q": "string", "page": 1}
+      },
+      "response": {
+        "200": {
+          "body": [{"id": 1, "title": "Tour A", "city": "Popayán"}]
+        }
+      }
+    },
+    {
+      "path": "/events/{id}",
+      "method": "GET",
+      "description": "Detalle evento",
+      "response": {
+        "200": {
+          "body": {"id": 1, "title": "Tour A", "description": "Descripcion", "price": 100}
+        }
+      }
+    }
+  ]
+}

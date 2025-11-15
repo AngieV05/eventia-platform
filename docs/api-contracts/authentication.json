@@ -1,0 +1,41 @@
+{
+  "service": "authentication",
+  "base_url": "http://localhost:8001",
+  "endpoints": [
+    {
+      "path": "/auth/login",
+      "method": "POST",
+      "description": "Autentica usuario y devuelve access token",
+      "request": {
+        "body": {
+          "email": "user@example.com",
+          "password": "string",
+          "role": "organizador|proveedor|asistente"
+        }
+      },
+      "response": {
+        "200": {
+          "body": {
+            "access_token": "string",
+            "token_type": "bearer",
+            "role": "organizador"
+          }
+        },
+        "401": {"body": {"detail": "Invalid credentials"}},
+        "400": {"body": {"detail": "Bad Request"}}
+      },
+      "auth": false
+    },
+    {
+      "path": "/auth/me",
+      "method": "GET",
+      "description": "Devuelve información del usuario autenticado",
+      "request": {"headers": {"Authorization": "Bearer <token>"}},
+      "response": {
+        "200": {"body": {"email": "user@example.com", "role": "organizador", "id": "uuid"}},
+        "401": {"body": {"detail": "Token inválido"}}
+      },
+      "auth": true
+    }
+  ]
+}

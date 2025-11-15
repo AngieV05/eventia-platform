@@ -1,0 +1,24 @@
+{
+  "service": "providers",
+  "base_url": "http://localhost:8003",
+  "endpoints": [
+    {
+      "path": "/providers",
+      "method": "GET",
+      "response": {
+        "200": {
+          "body": [{"id": "p1", "name": "Proveedor A"}]
+        }
+      }
+    },
+    {
+      "path": "/providers/{id}",
+      "method": "GET",
+      "response": {
+        "200": {
+          "body": {"id": "p1", "name": "Proveedor A", "services": []}
+        }
+      }
+    }
+  ]
+}

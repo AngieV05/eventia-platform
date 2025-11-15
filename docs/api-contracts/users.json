@@ -1,0 +1,36 @@
+{
+  "service": "users",
+  "base_url": "http://localhost:8002",
+  "endpoints": [
+    {
+      "path": "/users/me",
+      "method": "GET",
+      "auth": true,
+      "response": {
+        "200": {
+          "body": {
+            "id": "uuid",
+            "email": "user@example.com",
+            "name": "Angie",
+            "role": "organizador"
+          }
+        }
+      },
+      "description": "Perfil del usuario"
+    },
+    {
+      "path": "/users/{id}",
+      "method": "PUT",
+      "auth": true,
+      "request": {
+        "body": {
+          "name": "string",
+          "phone": "string"
+        }
+      },
+      "response": {
+        "200": {"body": {"id": "uuid", "name": "string"}}
+      }
+    }
+  ]
+}
