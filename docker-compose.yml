@@ -1,0 +1,95 @@
+version: '3.9'
+
+services:
+  mongo:
+    image: mongo:6.0
+    container_name: eventia9-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  authregistro:
+    build:
+      context: ./services/AuthRegistro
+      dockerfile: Dockerfile
+    container_name: authregistro
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - DB_NAME=eventia_db
+      - USERS_COLLECTION=users
+    ports:
+      - "8002:8002"
+    depends_on:
+      - mongo
+
+  authlogin:
+    build:
+      context: ./services/AuthLogin
+      dockerfile: Dockerfile
+    container_name: authlogin
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - DB_NAME=eventia_db
+      - USERS_COLLECTION=users
+    ports:
+      - "8001:8001"
+    depends_on:
+      - mongo
+
+  organizador:
+    build:
+      context: ./services/Organizador
+      dockerfile: Dockerfile
+    container_name: organizador
+    ports:
+      - "8003:8003"
+    depends_on:
+      - mongo
+
+  asistente:
+    build:
+      context: ./services/Asistente
+      dockerfile: Dockerfile
+    container_name: asistente
+    ports:
+      - "8004:8004"
+    depends_on:
+      - mongo
+
+  proveedor:
+    build:
+      context: ./services/Proveedor
+      dockerfile: Dockerfile
+    container_name: proveedor
+    ports:
+      - "8005:8005"
+    depends_on:
+      - mongo
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    ports:
+      - "8000:8000"
+    depends_on:
+      - authregistro
+      - authlogin
+      - organizador
+      - asistente
+      - proveedor
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api-gateway
+
+volumes:
+  mongo-data:

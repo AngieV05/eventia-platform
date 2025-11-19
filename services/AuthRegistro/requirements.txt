@@ -1,0 +1,7 @@
+
+passlib[bcrypt]
+python-dotenv
+pymongo[srv]
+fastapi
+uvicorn
+requests
